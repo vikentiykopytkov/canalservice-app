@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-cs
+    networks:
+      - app-network
+    hostname: postgres
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    env_file: ./env_files/postgres.env
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    command: python application.py
+    networks:
+      - app-network
+    depends_on:
+      - "postgres"
+    links:
+      - postgres
+    image: backend-cs
+    container_name: backend-cs
+    env_file:
+      - ./env_files/postgres.env
+      - ./env_files/general.env
+    ports:
+      - "1000:5000"
+  
+  frontend:
+    container_name: frontend-cs
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    ports:
+      - "1010:3000"
+
+networks:
+  app-network:
+    driver: bridge
