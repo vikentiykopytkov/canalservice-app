@@ -51,6 +51,8 @@ docker-compose restart
 
 * Google-таблица: https://docs.google.com/spreadsheets/d/1AQEg19yRpER_2s5VxpASdFjXfM1XZ0umpXqr1Fyha2o/edit#gid=0
 * Telegram-чат с оповещениями: https://t.me/csnotice
+* Flask API: <b>localhost</b>:1000
+* React Frontend: <b>localhost</b>:1010
 
 ```
 Telegram разработчика: @vikentiykopytkov
